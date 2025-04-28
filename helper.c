@@ -187,3 +187,21 @@ Array array_map(Array *array, int (*cb)(int, int)) {
   return *output_array;
 }
 
+int array_push(Array *array, int num) {
+  Array *current_item = array;
+  while (current_item->next != NULL) {
+    current_item = current_item->next;
+  }
+
+  Array *new_item = (Array *) malloc(sizeof(Array));
+  if (new_item == NULL) {
+    ERROR("Memory allocation failed! array_push\n");
+  }
+  new_item->val = num;
+  new_item->next = NULL;
+  current_item->next = new_item;
+
+  array->length = array->length + 1;
+  return array->length;
+}
+
