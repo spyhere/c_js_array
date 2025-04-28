@@ -30,7 +30,7 @@ Array new_array(int i, ...) {
   return *head;
 }
 
-char *array_join(Array * array, char* separator) {
+char *array_join(Array *array, char* separator) {
   int separator_length = strlen(separator);
   char *output = (char *) malloc(sizeof(char) * array->length + separator_length + 1);
   if (output == NULL) {
@@ -44,7 +44,7 @@ char *array_join(Array * array, char* separator) {
 
     current_item = current_item->next;
     if (current_item != NULL) {
-      for (int i = 0; i < strlen(separator); i++) {
+      for (int i = 0; i < separator_length; i++) {
         total++;
         output[total] = separator[i];
       }
