@@ -12,6 +12,10 @@ int filter_cb(int num, int index) {
   return num % 2 == 0;
 }
 
+int find_cb(int num, int index) {
+  return (num > 1) && (num < 4);
+}
+
 int main() {
   Array array = new_array(1,4,3,4,0);
   printf("My new array is %s\n", array_join(&array, "-**-"));
@@ -19,11 +23,12 @@ int main() {
   Array filtered_array = array_filter(&array, &filter_cb);
   printf("My filtered array is %s\n", array_join(&filtered_array, ", "));
   printf("My original array is still %s\n", array_join(&array, "-**-"));
+  printf("Found digit is %d\n", array_find(&array, &find_cb));
   // TODO:
   // 1. Make array_join to work with digits bigger than 0-9
   // 2. array_foreach +
   // 3. array_filter +
-  // 4. array_find
+  // 4. array_find +
   // 5. array_map
   // 6. array_push
   // 7. array_pop

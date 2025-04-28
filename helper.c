@@ -11,7 +11,7 @@ Array new_array(int i, ...) {
   Array *head = (Array *) malloc(sizeof(Array));
   head->val = i;
   head->next = NULL;
-  Array * current_item = head;
+  Array *current_item = head;
 
   int total = 1;
   while ((i = va_arg(args, int))) {
@@ -89,5 +89,22 @@ Array array_filter(Array *array, int (*cb)(int, int)) {
 
   output_array->length = amount_pushed;
   return *output_array;
+}
+
+int array_find(Array *array, int (*cb)(int, int)) {
+  int found_num = -1;
+  Array *current_item = array;
+
+  int index = 0;
+  while(current_item != NULL) {
+    if (cb(current_item->val, index) == 1) {
+      found_num = current_item->val;
+      break;
+    }
+    current_item = current_item->next;
+    index++;
+  }
+
+  return found_num;
 }
 
