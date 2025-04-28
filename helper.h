@@ -10,5 +10,6 @@ typedef struct Item {
 Array new_array(int i, ...);
 char* array_join(Array *array, char *separator);
 void array_foreach(Array *array, void (*cb)(int, int));
+Array array_filter(Array *array, int (*cb)(int, int));
 #endif
 

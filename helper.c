@@ -64,3 +64,30 @@ void array_foreach(Array *array, void (*cb)(int, int)) {
     index++;
   }
 }
+
+Array array_filter(Array *array, int (*cb)(int, int)) {
+  Array *output_array = (Array *) malloc(sizeof(Array));
+
+  Array *current_item = array;
+  Array *output_array_tail = output_array;
+  int index = 0;
+  int amount_pushed = 0;
+  while (current_item != NULL) {
+    if (cb(current_item->val, index) == 1) {
+      if (amount_pushed != 0) {
+        Array *new_item = (Array *) malloc(sizeof(Array));
+        output_array_tail->next = new_item;
+        output_array_tail = new_item;
+      }
+      output_array_tail->val = current_item->val;
+      output_array_tail->next = NULL;
+      amount_pushed ++;
+    }
+    current_item = current_item->next;
+    index++;
+  }
+
+  output_array->length = amount_pushed;
+  return *output_array;
+}
+
