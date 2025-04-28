@@ -108,3 +108,24 @@ int array_find(Array *array, int (*cb)(int, int)) {
   return found_num;
 }
 
+Array array_map(Array *array, int (*cb)(int, int)) {
+  Array *output_array = (Array *) malloc(sizeof(Array));
+
+  int index = 0;
+  Array *output_array_tail = output_array;
+  Array *current_item = array;
+  while (current_item != NULL) {
+    if (index != 0) {
+      Array *new_item = (Array *) malloc(sizeof(Array));
+      output_array_tail->next = new_item;
+      output_array_tail = new_item;
+    }
+    output_array_tail->val = cb(current_item->val, index);
+    output_array_tail->next = NULL;
+    current_item = current_item->next;
+    index ++;
+  }
+
+  return *output_array;
+}
+

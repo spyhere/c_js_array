@@ -12,5 +12,6 @@ char* array_join(Array *array, char *separator);
 void array_foreach(Array *array, void (*cb)(int, int));
 Array array_filter(Array *array, int (*cb)(int, int));
 int array_find(Array *array, int (*cb)(int, int));
+Array array_map(Array *array, int (*cb)(int, int));
 #endif
 
