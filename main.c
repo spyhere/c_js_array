@@ -10,9 +10,7 @@ void foreach_cb(int num, int index) {
 
 int main() {
   Array array = new_array(1,4,3,4,0);
-  char *array_joined = array_join(&array, "-**-");
-  printf("My array is %s\n", array_joined);
-
+  printf("My new array is %s\n", array_join(&array, "-**-"));
   array_foreach(&array, &foreach_cb);
   // TODO:
   // 1. Make array_join to work with digits bigger than 0-9
