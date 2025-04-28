@@ -4,14 +4,19 @@
 #include <string.h>
 #include "helper.h"
 
+void foreach_cb(int num, int index) {
+  printf("Num is %d with index %d\n", num, index);
+}
 
 int main() {
   Array array = new_array(1,4,3,4,0);
   char *array_joined = array_join(&array, "-**-");
   printf("My array is %s\n", array_joined);
+
+  array_foreach(&array, &foreach_cb);
   // TODO:
   // 1. Make array_join to work with digits bigger than 0-9
-  // 2. array_foreach
+  // 2. array_foreach +
   // 3. array_filter
   // 4. array_find
   // 5. array_map

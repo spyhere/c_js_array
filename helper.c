@@ -54,3 +54,13 @@ char *array_join(Array *array, char* separator) {
   output[total] = '\0';
   return output;
 }
+
+void array_foreach(Array *array, void (*cb)(int, int)) {
+  Array *current_item = array;
+  int index = 0;
+  while (current_item != NULL) {
+    cb(current_item->val, index);
+    current_item = current_item->next;
+    index++;
+  }
+}
