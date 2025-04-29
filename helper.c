@@ -81,10 +81,10 @@ char *array_join(Array *array, char* separator) {
   int str_index = 0;
   int index = 0;
   while (current_item != NULL) {
-    char *int_char = int_to_str(current_item->val, array_char_lengths[index]);
-    while (*int_char != '\0') {
-      output[str_index] = *int_char;
-      int_char++;
+    char *int_str = int_to_str(current_item->val, array_char_lengths[index]);
+    while (*int_str != '\0') {
+      output[str_index] = *int_str;
+      int_str++;
       str_index++;
     }
 
