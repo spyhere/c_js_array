@@ -69,6 +69,10 @@ char *int_to_str(int value, int size) {
 }
 
 char *array_join(Array *array, char* separator) {
+  if (array->length == 0) {
+    return "";
+  }
+
   int array_chars_sum = 0;
   int *array_char_lengths = measure_array(array, &array_chars_sum);
   int separator_length = strlen(separator);
@@ -102,6 +106,9 @@ char *array_join(Array *array, char* separator) {
 }
 
 void array_foreach(Array *array, void (*cb)(int, int)) {
+  if (array->length == 0) {
+    return;
+  }
   Array *current_item = array;
   int index = 0;
   while (current_item != NULL) {
@@ -112,6 +119,10 @@ void array_foreach(Array *array, void (*cb)(int, int)) {
 }
 
 Array array_filter(Array *array, int (*cb)(int, int)) {
+  if (array->length == 0) {
+    return *array;
+  }
+
   Array *output_array = (Array *) malloc(sizeof(Array));
   if (output_array == NULL) {
     ERROR("Memory allocation failed! array_filter\n");
@@ -144,6 +155,10 @@ Array array_filter(Array *array, int (*cb)(int, int)) {
 }
 
 int array_find(Array *array, int (*cb)(int, int)) {
+  if (array->length == 0) {
+    return -1;
+  }
+
   int found_num = -1;
   Array *current_item = array;
 
@@ -161,6 +176,10 @@ int array_find(Array *array, int (*cb)(int, int)) {
 }
 
 Array array_map(Array *array, int (*cb)(int, int)) {
+  if (array->length == 0) {
+    return *array;
+  }
+
   Array *output_array = (Array *) malloc(sizeof(Array));
   if (output_array == NULL) {
     ERROR("Memory allocation failed! array_map\n");
@@ -184,10 +203,17 @@ Array array_map(Array *array, int (*cb)(int, int)) {
     index ++;
   }
 
+  output_array->length = index + 1;
   return *output_array;
 }
 
 int array_push(Array *array, int num) {
+  if (array->length == 0) {
+    array->val = num;
+    array->length = 1;
+    return array->length;
+  }
+
   Array *current_item = array;
   while (current_item->next != NULL) {
     current_item = current_item->next;
