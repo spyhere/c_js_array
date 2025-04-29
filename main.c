@@ -21,19 +21,19 @@ int map_cb(int num, int index) {
 }
 
 int main() {
-  Array array = new_array(1,4,3,4, 100000, 99992929, -10, 0);
-  printf("My new array is %s\n", array_join(&array, "-**-"));
-  array_foreach(&array, &foreach_cb);
-  Array filtered_array = array_filter(&array, &filter_cb);
-  printf("My filtered array is %s\n", array_join(&filtered_array, ", "));
-  printf("My original array is still %s\n", array_join(&array, "-"));
-  printf("Found digit is %d\n", array_find(&array, &find_cb));
-  Array mapped_array = array_map(&array, &map_cb);
-  printf("Mapped new array: %s\n", array_join(&mapped_array, ", "));
-  array_push(&array, 11);
-  printf("Original array after push operation: %s\n", array_join(&array, ", "));
-  printf("Retained value is %d\n", array_pop(&array));
-  printf("My current array is %s\n", array_join(&array, ", "));
+  Array *array = new_array(1,4,3,4, 100000, 99992929, -10, 0);
+  printf("My new array is %s\n", array_join(array, "-**-"));
+  array_foreach(array, &foreach_cb);
+  Array *filtered_array = array_filter(array, &filter_cb);
+  printf("My filtered array is %s\n", array_join(filtered_array, ", "));
+  printf("My original array is still %s\n", array_join(array, "-"));
+  printf("Found digit is %d\n", array_find(array, &find_cb));
+  Array *mapped_array = array_map(array, &map_cb);
+  printf("Mapped new array: %s\n", array_join(mapped_array, ", "));
+  array_push(array, 11);
+  printf("Original array after push operation: %s\n", array_join(array, ", "));
+  printf("Retained value is %d\n", array_pop(array));
+  printf("My current array is %s\n", array_join(array, ", "));
   // TODO:
   // 1. Make array_join to work with digits bigger than 0-9 +
   // 2. array_foreach +

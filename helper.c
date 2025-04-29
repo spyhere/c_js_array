@@ -5,7 +5,7 @@
 #include "helper.h"
 #include "logging.h"
 
-Array new_array(int i, ...) {
+Array *new_array(int i, ...) {
   va_list args;
   va_start (args, i);
 
@@ -34,7 +34,7 @@ Array new_array(int i, ...) {
   head->length = total;
   va_end(args);
 
-  return *head;
+  return head;
 }
 
 int *measure_array(Array *array, int *sum) {
@@ -118,9 +118,9 @@ void array_foreach(Array *array, void (*cb)(int, int)) {
   }
 }
 
-Array array_filter(Array *array, int (*cb)(int, int)) {
+Array *array_filter(Array *array, int (*cb)(int, int)) {
   if (array->length == 0) {
-    return *array;
+    return array;
   }
 
   Array *output_array = (Array *) malloc(sizeof(Array));
@@ -151,7 +151,7 @@ Array array_filter(Array *array, int (*cb)(int, int)) {
   }
 
   output_array->length = amount_pushed;
-  return *output_array;
+  return output_array;
 }
 
 int array_find(Array *array, int (*cb)(int, int)) {
@@ -175,9 +175,9 @@ int array_find(Array *array, int (*cb)(int, int)) {
   return found_num;
 }
 
-Array array_map(Array *array, int (*cb)(int, int)) {
+Array *array_map(Array *array, int (*cb)(int, int)) {
   if (array->length == 0) {
-    return *array;
+    return array;
   }
 
   Array *output_array = (Array *) malloc(sizeof(Array));
@@ -204,7 +204,7 @@ Array array_map(Array *array, int (*cb)(int, int)) {
   }
 
   output_array->length = index + 1;
-  return *output_array;
+  return output_array;
 }
 
 int array_push(Array *array, int num) {
