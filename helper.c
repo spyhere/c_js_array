@@ -258,3 +258,23 @@ int array_pop(Array *array) {
   return ret_value;
 }
 
+int array_shift(Array **array) {
+  if ((*array)->length == 0) {
+    return -1;
+  }
+  if ((*array)->length == 1) {
+    int ret_value = (*array)->val;
+    (*array)->val = -1;
+    (*array)->length = 0;
+    return ret_value;
+  }
+
+  Array *head = *array;
+  int ret_value = head->val;
+
+  *array = (*array)->next;
+  (*array)->length = head->length - 1;
+  free(head);
+  return ret_value;
+}
+

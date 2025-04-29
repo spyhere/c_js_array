@@ -15,5 +15,6 @@ int array_find(Array *array, int (*cb)(int, int));
 Array *array_map(Array *array, int (*cb)(int, int));
 int array_push(Array *array, int num);
 int array_pop(Array *array);
+int array_shift(Array **array);
 #endif
 
