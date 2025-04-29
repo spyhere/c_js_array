@@ -278,3 +278,19 @@ int array_shift(Array **array) {
   return ret_value;
 }
 
+int array_unshift(Array **array, int num) {
+  if ((*array)->length == 0) {
+    (*array)->length = 1;
+    (*array)->val = num;
+    return 1;
+  }
+
+  Array *new_head = (Array *) malloc(sizeof(Array));
+  new_head->length = (*array)->length + 1;
+  new_head->val = num;
+  (*array)->length = -1;
+  new_head->next = (*array);
+  *array = new_head;
+  return (*array)->length;
+}
+
