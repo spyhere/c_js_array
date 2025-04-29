@@ -231,3 +231,30 @@ int array_push(Array *array, int num) {
   return array->length;
 }
 
+int array_pop(Array *array) {
+  if (array->length == 1) {
+    array->length = 0;
+    int ret_value = array->val;
+    array->val = 0;
+    return ret_value;
+  }
+
+  int index = 0;
+  int ret_value = -1;
+  Array *current_item = array;
+  while (current_item->next != NULL) {
+    if (index == array->length - 2) {
+      ret_value = current_item->next->val;
+      Array *last_item = current_item->next;
+      current_item->next = NULL;
+      free(last_item);
+      array->length = array->length - 1;
+      break;
+    }
+    current_item = current_item->next;
+    index++;
+  }
+
+  return ret_value;
+}
+
