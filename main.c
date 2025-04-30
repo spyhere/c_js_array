@@ -19,7 +19,6 @@ int find_cb(int num, int index) {
 int map_cb(int num, int index) {
   return (num + index) * 2;
 }
-
 int sort_cb(const void *a, const void *b) {
   const int arg_a = *(const int*)a;
   const int arg_b = *(const int*)b;
@@ -46,6 +45,9 @@ int main() {
   printf("My current array is %s\n", array_join(array, ", "));
   array_sort(array, &sort_cb);
   printf("Array after sort: %s\n", array_join(array, ", "));
+  Array *sliced_array = array_slice(array, 3, 5);
+  printf("Sliced array: %s\n", array_join(sliced_array, ", "));
+  printf("My initial array is still %s\n", array_join(array, ", "));
   // TODO:
   // 1. Make array_join to work with digits bigger than 0-9 +
   // 2. array_foreach +
@@ -57,7 +59,7 @@ int main() {
   // 8. array_shift +
   // 9. array_unshift +
   // 10. array_sort + 
-  // 11??? splice/slice
+  // 11??? splice/slice +
   return 0;
 }
 

@@ -321,3 +321,44 @@ void array_sort(Array *array, int (*cb)(const void*, const void*)) {
   free(temporary_arr);
 }
 
+Array *array_slice(Array *array, int start, int end) {
+  Array *output_array = (Array *) malloc(sizeof(int) * array->length);
+  if (array->length <= 1) {
+    output_array->length = array->length;
+    output_array->val = array->val;
+    return output_array;
+  }
+
+  int is_start_valid = start >= 0 && start < array->length;
+  int is_end_valid = end > start;
+  if (!is_start_valid || !is_end_valid) {
+    return output_array;
+  }
+
+  int index = 0;
+  int amount_copied = 0;
+  Array *cur_array_item = array;
+  Array *cur_output_item = output_array;
+
+  while (cur_array_item != NULL) {
+    if (index >= start && index < end) {
+      if (amount_copied != 0) {
+        Array *new_item = (Array *) malloc(sizeof(Array));
+        if (new_item == NULL) {
+          ERROR("Memory allocation failed! array_slice while\n");
+        }
+        cur_output_item->next = new_item;
+        cur_output_item = new_item;
+      }
+      cur_output_item->val = cur_array_item->val;
+      amount_copied++;
+    }
+
+    cur_array_item = cur_array_item->next;
+    index++;
+  }
+
+  output_array->length = amount_copied;
+  return output_array;
+}
+

@@ -18,5 +18,6 @@ int array_pop(Array *array);
 int array_shift(Array **array);
 int array_unshift(Array **array, int num);
 void array_sort(Array *array, int (*cb)(const void*, const void*));
+Array *array_slice(Array *array, int start, int end);
 #endif
 
