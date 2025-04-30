@@ -362,3 +362,60 @@ Array *array_slice(Array *array, int start, int end) {
   return output_array;
 }
 
+Array *array_splice(Array **array, int start, int amount) {
+  Array *output_array = (Array *) malloc(sizeof(Array));
+  int is_start_valid = start >= 0 && start < (*array)->length;
+  if (!is_start_valid) {
+    return output_array;
+  }
+
+  int initial_arr_length = (*array)->length;
+  int index = 0;
+  int amount_copied = 0;
+  Array **cur_array_item = array;
+  Array *prev_array_item = NULL;
+  Array *cur_output_item = output_array;
+
+  while (*cur_array_item != NULL) {
+    if (index++ < start) {
+      prev_array_item = *cur_array_item;
+      cur_array_item = &(*cur_array_item)->next;
+      continue;
+    }
+    if (amount_copied >= amount) {
+      break;
+    }
+
+    if (amount_copied != 0) {
+      Array *new_item = (Array *) malloc(sizeof(Array));
+      if (new_item == NULL) {
+        ERROR("Memory allocation failed! array_splice while\n");
+      }
+      cur_output_item->next = new_item;
+      cur_output_item = new_item;
+    }
+    cur_output_item->val = (*cur_array_item)->val;
+    amount_copied++;
+
+    if (prev_array_item == NULL) {
+      Array *dead_item = *cur_array_item;
+      *cur_array_item = (*dead_item).next;
+      free(dead_item);
+    } else {
+      Array *dead_item = prev_array_item->next;
+      prev_array_item->next = (*cur_array_item)->next;
+      /* Since previous line is doing exactly the same the next line is reduntant.
+       * Explanation: prev_array_item->next === *cur_array_item and since we always
+       * dereference cur_array_item it will give us the same pointer as prev_array_item->next.
+       * Took me a while to understand...
+       * */
+      // cur_array_item = &prev_array_item->next;
+      free(dead_item);
+    }
+  }
+
+  output_array->length = amount_copied;
+  (*array)->length = initial_arr_length - amount_copied;
+  return output_array;
+}
+

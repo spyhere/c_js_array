@@ -48,6 +48,9 @@ int main() {
   Array *sliced_array = array_slice(array, 3, 5);
   printf("Sliced array: %s\n", array_join(sliced_array, ", "));
   printf("My initial array is still %s\n", array_join(array, ", "));
+  Array *removed_elements = array_splice(&array, 6, 2);
+  printf("Removed elements are %s\n", array_join(removed_elements, ", "));
+  printf("My initial array has become %s\n", array_join(array, ", "));
   // TODO:
   // 1. Make array_join to work with digits bigger than 0-9 +
   // 2. array_foreach +
@@ -59,7 +62,7 @@ int main() {
   // 8. array_shift +
   // 9. array_unshift +
   // 10. array_sort + 
-  // 11??? splice/slice +
+  // 11??? splice/slice ++
   return 0;
 }
 
