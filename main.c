@@ -20,6 +20,12 @@ int map_cb(int num, int index) {
   return (num + index) * 2;
 }
 
+int sort_cb(const void *a, const void *b) {
+  const int arg_a = *(const int*)a;
+  const int arg_b = *(const int*)b;
+  return (arg_a > arg_b) - (arg_a < arg_b);
+}
+
 int main() {
   Array *array = new_array(1,4,3,4, 100000, 99992929, -10, 0);
   printf("My new array is %s\n", array_join(array, "-**-"));
@@ -38,7 +44,8 @@ int main() {
   printf("My new array is %s\n", array_join(array, ", "));
   array_unshift(&array, 99);
   printf("My current array is %s\n", array_join(array, ", "));
-
+  array_sort(array, &sort_cb);
+  printf("Array after sort: %s\n", array_join(array, ", "));
   // TODO:
   // 1. Make array_join to work with digits bigger than 0-9 +
   // 2. array_foreach +
@@ -49,7 +56,7 @@ int main() {
   // 7. array_pop +
   // 8. array_shift +
   // 9. array_unshift +
-  // 10. array_sort
+  // 10. array_sort + 
   // 11??? splice/slice
   return 0;
 }

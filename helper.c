@@ -294,3 +294,30 @@ int array_unshift(Array **array, int num) {
   return (*array)->length;
 }
 
+void array_sort(Array *array, int (*cb)(const void*, const void*)) {
+  if (array->length < 2) {
+    return;
+  }
+
+  int *temporary_arr = (int *) malloc(sizeof(int) * array->length);
+  if (temporary_arr == NULL) {
+    ERROR("Memory allocation failed! array_sort\n");
+  }
+  Array *current_item = array;
+  int index = 0;
+  while (current_item != NULL) {
+    temporary_arr[index] = current_item->val;
+    current_item = current_item->next;
+    index++;
+  }
+
+  qsort(temporary_arr, array->length, sizeof(int), cb);
+
+  current_item = array;
+  for (int i = 0; i < array->length; i++) {
+    current_item->val = temporary_arr[i];
+    current_item = current_item->next;
+  }
+  free(temporary_arr);
+}
+
