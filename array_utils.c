@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "helper.h"
+#include "array_utils.h"
 #include "logging.h"
 
 Array *new_array(int i, ...) {

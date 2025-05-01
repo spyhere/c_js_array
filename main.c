@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-#include "helper.h"
+#include "array_utils.h"
 
 void foreach_cb(int num, int index) {
   printf("Num is %d with index %d\n", num, index);
