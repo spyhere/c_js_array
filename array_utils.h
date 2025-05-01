@@ -3,7 +3,7 @@
 
 typedef struct Item {
   int val;
-  struct Item *next;
+  struct Item *p_next;
   int length;
 } Array;
 
