@@ -81,7 +81,7 @@ char *array_join(Array *array, char* separator) {
     ERROR("Memory allocation failed! array_join\n");
   }
 
-  Array * current_item = array;
+  Array *current_item = array;
   int str_index = 0;
   int index = 0;
   while (current_item != NULL) {

@@ -3,12 +3,12 @@
 
 typedef struct Item {
   int val;
-  struct Item * next;
+  struct Item *next;
   int length;
 } Array;
 
 Array *new_array(int i, ...);
-char* array_join(Array *array, char *separator);
+char *array_join(Array *array, char *separator);
 void array_foreach(Array *array, void (*cb)(int, int));
 Array *array_filter(Array *array, int (*cb)(int, int));
 int array_find(Array *array, int (*cb)(int, int));
