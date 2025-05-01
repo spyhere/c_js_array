@@ -47,7 +47,7 @@ int *measure_array(Array *p_array, int *p_sum) {
   int chars_sum = 0;
   Array *p_current_item = p_array;
   while (p_current_item != NULL) {
-    int current_length = snprintf(NULL, 0, "%d", p_current_item->val) + 1;
+    int current_length = snprintf(NULL, 0, "%d", p_current_item->val);
     chars_sum += current_length;
     p_output[index] = current_length;
 
@@ -60,7 +60,7 @@ int *measure_array(Array *p_array, int *p_sum) {
 }
 
 char *int_to_str(int value, int size) {
-  char *p_str = (char *) malloc(sizeof(char) * size);
+  char *p_str = (char *) malloc(sizeof(char) * size + 1);
   if (p_str == NULL) {
     ERROR("Memory allocation failed! int_to_str\n");
   }
