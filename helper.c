@@ -397,21 +397,19 @@ Array *array_splice(Array **array, int start, int amount) {
     cur_output_item->val = (*cur_array_item)->val;
     amount_copied++;
 
+    Array *dead_item = *cur_array_item;
     if (prev_array_item == NULL) {
-      Array *dead_item = *cur_array_item;
       *cur_array_item = (*dead_item).next;
-      free(dead_item);
     } else {
-      Array *dead_item = prev_array_item->next;
-      prev_array_item->next = (*cur_array_item)->next;
+      prev_array_item->next = dead_item->next;
       /* Since previous line is doing exactly the same the next line is reduntant.
        * Explanation: prev_array_item->next === *cur_array_item and since we always
        * dereference cur_array_item it will give us the same pointer as prev_array_item->next.
        * Took me a while to understand...
        * */
       // cur_array_item = &prev_array_item->next;
-      free(dead_item);
     }
+    free(dead_item);
   }
 
   output_array->length = amount_copied;
