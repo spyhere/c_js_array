@@ -1,4 +1,4 @@
-Implementation of JS array in C (for fun).
+# Implementation of JS array in C (for fun).
 
 Since C doesn't support optional arguments or function overloading I couldn't implement some methods the same way they are done in JS (for example "slice" or "splice").
 
