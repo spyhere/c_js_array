@@ -91,6 +91,7 @@ char *array_join(Array *p_array, char* p_separator) {
       p_int_str++;
       str_index++;
     }
+    free(p_int_str - p_array_char_lengths[index]);
 
     p_current_item = p_current_item->p_next;
     if (p_current_item != NULL) {
